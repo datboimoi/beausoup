@@ -1,9 +1,21 @@
 #import beautifulsoup and request here
+from urllib import response
 from bs4 import BeautifulSoup
 import requests
 import json 
 
-#function to get job list from url f'https://www.talent.com/jobs?k={role}&l={location}'
+# Setting up Flask
+from flask import Flask, render_template
+app = Flask(__name__, template_folder = 'templates')
+
+@app.route('/')
+
+# Displaying html file
+def displayJobDetails(name=response):
+    return render_template('index.html', response = response)
+
+
+# Function to get job list from url f'https://www.talent.com/jobs?k={role}&l={location}'
 def getJobList(role,location):
     url = f'https://www.talent.com/jobs?k={role}&l={location}'
     # Complete the missing part of this function here
