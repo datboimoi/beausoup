@@ -10,11 +10,12 @@ app = Flask(__name__, template_folder = 'templates')
 
 @app.route('/')
 
-# Displaying html file
-def displayJobDetails(name=response):
-    return render_template('index.html', response = response)
+def displayJobDetails():
 
+    jobJSON = open('jobDetails.json')
+    dataJSON = json.load(jobJSON)
 
+    return render_template('index.html', dataJSON = dataJSON)
 # Function to get job list from url f'https://www.talent.com/jobs?k={role}&l={location}'
 def getJobList(role,location):
     url = f'https://www.talent.com/jobs?k={role}&l={location}'
@@ -55,6 +56,7 @@ def getJobList(role,location):
     for result in jobList:
         print(str(result) + '\n')
     
+    # Returns the generated job list
     return jobList
 
 #save data in JSON file
@@ -79,6 +81,8 @@ def main():
     jobDetails = getJobList(role, location)
 
     saveDataInJSON(jobDetails)
+
+    #displayJobDetails()
 
 if __name__ == '__main__':
     main()
